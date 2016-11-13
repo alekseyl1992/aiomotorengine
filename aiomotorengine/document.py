@@ -62,7 +62,7 @@ class BaseDocument(object):
         for name, value in dic.items():
             field = cls.get_field_by_db_name(name)
             if field:
-                field_values[field.name] = cls._fields[field.name].from_son(value)
+                field_values[field.name] = field.from_son(value)
             else:
                 field_values[name] = value
 
