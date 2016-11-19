@@ -86,9 +86,21 @@ class BaseDocument(object):
             value = self.get_field_value(name)
 
             if field.required and field.is_empty(value):
-                raise InvalidDocumentError("Field '%s' is required." % name)
+                raise InvalidDocumentError(
+                    "Field '{}' in {} has empty value: '{}' {}".format(
+                        name,
+                        type(self),
+                        value,
+                        type(value)
+                    ))
             if not field.validate(value):
-                raise InvalidDocumentError("Field '%s' must be valid." % name)
+                raise InvalidDocumentError(
+                    "Field '{}' in {} has invalid value: '{}' {}".format(
+                        name,
+                        type(self),
+                        value,
+                        type(value)
+                    ))
 
         return True
 
